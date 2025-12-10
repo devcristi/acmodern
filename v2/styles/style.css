@@ -1,0 +1,33 @@
+:root
+{
+    --background_color: #f8f9fa;
+    --font_color: #070600;
+    --primary_color: #9B40EA;        /* Mov vibrant */
+    --primary_hover: #7A2DC2;        /* Mov mai închis pentru hover */
+    --hero_text_color: #FEFFFE;      /* Text alb pentru hero */
+    --button_text_color: #000000;    /* Text negru pentru buton */
+    --secondary_color: #F5F5F5;
+    --secondary_hover: #E0E0E0;      /* Hover pentru carduri/backgrounds */
+    --accent_color: #FAA916;         /* Culoare accent (portocaliu) pentru CTA */
+    --success_color: #59CD90;        /* Verde pentru succese */
+    --danger_color: #EE6352;         /* Roșu pentru erori/warning */
+    --text_muted: #6c757d;           /* Text secundar */
+    --border_color: #dee2e6;         /* Borduri subtile */
+    --shadow: rgba(0, 0, 0, 0.1);    /* Umbre */
+}
+
+* {
+    font-family: 'League Spartan', sans-serif;
+    transition: none !important;
+    animation: none !important;
+}
+
+*::before,
+*::after {
+    transition: none !important;
+    animation: none !important;
+}
+
+body {
+    font-family: 'League Spartan', sans-serif;
+}

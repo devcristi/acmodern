@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curs 4: Fundamente Arhitectură UCP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="curs4_style.css">
+</head>
+<body>
+
+    <div class="hero-section" id="hero">
+        <div class="hero-content">
+            <span class="badge bg-light text-primary mb-2">Arhitectura Calculatoarelor</span>
+            <h1 class="course-title">CURS 4: ARHITECTURA UCP</h1>
+            <p class="course-subtitle">
+                Fundamente privind arhitectura Unității Centrale de Procesare.<br>
+                Structură, Funcționare Ciclică, Interfațare și Organizare.
+            </p>
+            <button class="btn-explore" onclick="startLearning()">
+                <i class="bi bi-book-half"></i> Începe Studiul
+            </button>
+        </div>
+    </div>
+
+    <div class="content-container hidden" id="main-content">
+
+        <div class="topic-card fade-in-card">
+            <div class="card-header-custom">
+                <i class="bi bi-cpu"></i> 1. Fundamente și Structură
+            </div>
+            <div class="card-body-custom">
+                <p class="lead">Unitatea Centrală de Prelucrare (UCP) este un procesor de <strong>uz general</strong> cu set de instrucțiuni, responsabil de interpretarea și execuția programelor.</p>
+                
+                <div class="accordion custom-accordion" id="accordionStructura">
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                <i class="bi bi-diagram-3 me-2"></i> Clasificare și Rol
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionStructura">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li><strong>Procesor de uz general:</strong> Spre deosebire de procesoarele de I/O sau aritmetice care au funcții limitate, UCP execută un set specific de instrucțiuni binare furnizate din exterior.</li>
+                                    <li><strong>Uniprocesor vs Multiprocesor:</strong> În accepțiunea clasică (von Neumann), mașina conține o singură UCP (uniprocesor). Sistemele cu două sau mai multe UCP se numesc multiprocesor.</li>
+                                    <li><strong>Considerații arhitecturale:</strong>
+                                        <ul>
+                                            <li>Setul de instrucțiuni;</li>
+                                            <li>Organizarea registrelor ALU și UC;</li>
+                                            <li>Modul de comunicare cu dispozitivele externe.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                <i class="bi bi-gear-wide-connected me-2"></i> UCP ca Automat de Ordinul 3
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionStructura">
+                            <div class="accordion-body">
+                                <div class="alert alert-info">
+                                    <strong>Definiție:</strong> Structura procesorului presupune o buclă de reacție între două automate componente.
+                                </div>
+                                <p>Procesorul este compus din:</p>
+                                <ol>
+                                    <li><strong>Unitatea de Prelucrare a Datelor (ALU + Registre):</strong> Automat de ordinul ≥ 2.</li>
+                                    <li><strong>Unitatea de Control (UC):</strong> Automat de ordinul ≥ 2.</li>
+                                </ol>
+                                <p>Deoarece UC își modifică secvența de comenzi pe baza <strong>indicatorilor de condiții (Flags)</strong> primiți de la ALU (feedback), întregul procesor devine un <strong>Automat de Ordinul 3</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <hr class="my-4">
+
+                <h5 class="mb-3"><i class="bi bi-layers"></i> Componente Interne Detaliate</h5>
+                <ul class="nav nav-tabs" id="compTabs" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-alu">Unitatea de Prelucrare (ALU)</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-uc">Unitatea de Control (UC)</button>
+                    </li>
+                </ul>
+                <div class="tab-content p-3 border border-top-0 rounded-bottom bg-light">
+                    <div class="tab-pane fade show active" id="tab-alu">
+                        <p>Efectuează operații cu operanzi de intrare codificați pe <strong>n biți</strong> (de obicei egal cu lățimea magistralei interne).</p>
+                        <ul>
+                            <li><strong>Funcții:</strong> Operații aritmetice, logice, decodificare, multiplexare.</li>
+                            <li><strong>Registre locale:</strong> Memorie de mare viteză pentru stocarea temporară a operanzilor.</li>
+                            <li><strong>Ieșiri cheie:</strong> Furnizează rezultatul datelor și <strong>Indicatori de condiții (Flags)</strong> (transport, împrumut, zero, semn, paritate etc.) stocați în registre de stare.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="tab-uc">
+                        <p>Generează succesiunea de comenzi (algoritmul de stare). Poate fi implementată în două moduri:</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card p-2 h-100 border-primary">
+                                    <strong>1. UC Cablată</strong>
+                                    <small>Algoritm implementat în structura fizică (hardware). Mai rapidă.</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card p-2 h-100 border-success">
+                                    <strong>2. UC Microprogramată</strong>
+                                    <small>Comenzile sunt stocate într-o memorie de control de mare viteză. Mai flexibilă.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3"><strong>Sub-unități funcționale:</strong> Control la nivel de micro-operații și Control la nivel de secvențiere (automat de adresare).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="topic-card fade-in-card">
+            <div class="card-header-custom">
+                <i class="bi bi-arrow-repeat"></i> 2. Ciclul Instrucțiune și Sincronizarea
+            </div>
+            <div class="card-body-custom">
+                
+                <div class="info-box mb-4">
+                    <h6><i class="bi bi-clock"></i> Niveluri de Sincronizare</h6>
+                    <ol>
+                        <li>Nivel elementar: <strong>Semnalul de ceas</strong>.</li>
+                        <li>Nivel transfer date: Sincronizare cu MP și I/O.</li>
+                        <li>Nivel evenimente externe: <strong>Întreruperi</strong> (Sincronizarea cu evenimente externe asincrone).</li>
+                    </ol>
+                </div>
+
+                <h5 class="text-center mb-4">Desfășurarea Ciclului Instrucțiune (CI)</h5>
+                
+                <div class="cycle-viewer">
+                    <div class="cycle-controls text-center mb-3">
+                        <button class="btn btn-outline-primary btn-sm" onclick="showStep(1)">1. Fetch</button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="showStep(2)">2. Decode</button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="showStep(3)">3. Execute</button>
+                        <button class="btn btn-outline-danger btn-sm" onclick="showStep(4)">4. Interrupts</button>
+                    </div>
+
+                    <div id="step-1" class="cycle-step-content active">
+                        <strong>Faza 1: Adresare și Aducere (Fetch)</strong>
+                        <p>Este primul <em>Ciclu Mașină (CM)</em>. UC adresează și controlează aducerea instrucțiunii curente din Memoria Principală.</p>
+                    </div>
+                    <div id="step-2" class="cycle-step-content hidden">
+                        <strong>Faza 2: Decodificare</strong>
+                        <p>UC decodifică codul instrucțiunii și generează secvența de comenzi specifice către ALU și exterior (ex: citirea operanzilor).</p>
+                    </div>
+                    <div id="step-3" class="cycle-step-content hidden">
+                        <strong>Faza 3: Execuție</strong>
+                        <p>ALU execută micro-operațiile (aritmetice/logice) și setează indicatorii. Rezultatul este stocat în registre interne sau externe (MP, I/O).</p>
+                    </div>
+                    <div id="step-4" class="cycle-step-content hidden">
+                        <strong>Faza 4: Test Întreruperi</strong>
+                        <p>Se face la <em>sfârșitul</em> fiecărui ciclu instrucțiune. Dacă există o cerere, UCP suspendă programul curent pentru a trata întreruperea.</p>
+                    </div>
+                </div>
+
+                <div class="text-muted small mt-3 border-top pt-2">
+                    <p><strong>Definiții Timp:</strong></p>
+                    <ul>
+                        <li><strong>Ciclu Mașină (CM):</strong> Suma activităților pentru o operație intermediară (ex: citire memorie). Un CI are mai multe CM.</li>
+                        <li><strong>Timp de Ciclu UCP (Stare):</strong> Timpul pentru cea mai scurtă micro-operație UCP. Inversul său este frecvența de ceas.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="topic-card fade-in-card">
+            <div class="card-header-custom">
+                <i class="bi bi-hdd-network"></i> 3. Interfațare și Arhitecturi de Memorie
+            </div>
+            <div class="card-body-custom">
+                <p>Comunicarea cu exteriorul se face pe magistrale (bus). De obicei, liniile de date intrare ($D_{in}$) și ieșire ($D_{out}$) se unifică într-o <strong>magistrală bidirecțională</strong>.</p>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-6">
+                        <div class="comparison-card vn">
+                            <div class="card-title">Arhitectura Von Neumann</div>
+                            <p>Memorie <strong>unică</strong> pentru Date și Instrucțiuni.</p>
+                            <ul class="comparison-list">
+                                <li>Magistrală comună (gât de sticlă).</li>
+                                <li><strong>Avantaj:</strong> Simplificarea UCP (automat de adresare mai simplu), flexibilitate în alocarea memoriei.</li>
+                                <li><strong>Dezavantaj:</strong> Viteză mai mică (conflicte de acces).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="comparison-card ha">
+                            <div class="card-title">Arhitectura Harvard</div>
+                            <p>Memorii <strong>separate</strong>: Memorie Program (MP) și Memorie Date (MD).</p>
+                            <ul class="comparison-list">
+                                <li>Magistrale separate pentru adrese și date.</li>
+                                <li><strong>Avantaj:</strong> Viteză mare (acces simultan la date și instrucțiuni).</li>
+                                <li><strong>Dezavantaj:</strong> Complexitate crescută a magistralelor.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technical-note p-3 bg-white border rounded">
+                    <h6><i class="bi bi-tools"></i> Rolul Circuitelor Tampon (Buffers) de Interfață</h6>
+                    <p>Nu au doar rol de deconectare (HiZ - înaltă impedanță), ci asigură parametrii electrici:</p>
+                    <div class="row text-center">
+                        <div class="col-6 border-end">
+                            <strong>Fan-out</strong><br>
+                            <span class="text-muted small">Factor de încărcare la ieșire</span>
+                        </div>
+                        <div class="col-6">
+                            <strong>Fan-in</strong><br>
+                            <span class="text-muted small">Factor de încărcare la intrare</span>
+                        </div>
+                    </div>
+                    <p class="mt-2 small mb-0">Acestea asigură nivelurile corecte de tensiune și controlează capacitatea parazită pe linii.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-nav hidden" id="footer-nav">
+        <button class="btn btn-outline-secondary me-2" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <i class="bi bi-arrow-up"></i> Sus
+        </button>
+        <button class="btn btn-primary btn-lg" onclick="alert('Felicitări! Ai parcurs tot conținutul Cursului 4.')">
+            Marchează ca Finalizat <i class="bi bi-check-circle-fill"></i>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="curs4_script.js"></script>
+</body>
+</html>
