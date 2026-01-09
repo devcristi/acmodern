@@ -26,6 +26,16 @@ function startLearning() {
     }, 500);
 }
 
+// Navbar scroll logic
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('shadow');
+    } else {
+        navbar.classList.remove('shadow');
+    }
+});
+
 // Funcție pentru Stepper-ul Ciclului Instrucțiune
 function showStep(stepNumber) {
     // 1. Ascunde toți pașii

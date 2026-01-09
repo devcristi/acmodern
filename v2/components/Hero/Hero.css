@@ -1,20 +1,19 @@
 /* Navbar */
 .custom-navbar {
-    background: var(--primary_color);
-    padding: 0.75rem 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    background: #7A2DC2; /* Slightly darker for better visibility */
+    padding: 0.5rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
 
 .custom-navbar.scrolled {
-    background: var(--primary_hover);
+    background: #62249D;
 }
 
 .custom-navbar .navbar-brand {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #ffffff;
-    text-decoration: none;
+    color: #ffffff !important;
 }
 
 .custom-navbar .navbar-brand i {
@@ -23,21 +22,36 @@
 }
 
 .custom-navbar .navbar-nav {
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important;
     gap: 1.5rem;
 }
 
 .custom-navbar .nav-link {
-    color: rgba(255, 255, 255, 0.92);
+    color: #FFFFFF !important;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 0.08em;
-    padding: 0.25rem 0;
+    padding: 0.5rem 1rem;
+    opacity: 0.9;
 }
 
 .custom-navbar .nav-link:hover,
-.custom-navbar .nav-link:focus,
+.custom-navbar .nav-link:focus {
+    opacity: 1;
+    color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+    .custom-navbar .navbar-nav {
+        gap: 0.5rem;
+    }
+    .custom-navbar .nav-link {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.5rem;
+    }
+}
 .custom-navbar .nav-link.active {
     color: #ffffff;
 }
@@ -115,7 +129,7 @@
     font-weight: 300;
 }
 
-button.btn-light {
+button.btn-light, .btn-light {
     background-color: var(--hero_text_color);
     color: var(--button_text_color);
     border: none;
@@ -129,12 +143,13 @@ button.btn-light {
     text-transform: uppercase;
     font-size: 0.95rem;
     letter-spacing: 0.5px;
+    transition: all 0.3s ease;
 }
 
-button.btn-light:hover {
+button.btn-light:hover, .btn-light:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     background-color: var(--hero_text_color);
-    color: var(--button_text_color);
+    transform: translateY(-2px);
 }
 
 /* Button Text Animation Layers */

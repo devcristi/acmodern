@@ -100,12 +100,12 @@
 .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
     padding: 0 2rem;
 }
 
 .accordion-content.active {
-    max-height: 1000px;
+    max-height: 2000px;
     padding: 0 2rem 2rem 2rem;
 }
 
@@ -320,4 +320,72 @@
     .content-card {
         padding: 2rem 1.5rem;
     }
+}
+
+/* UCP Diagram Styles */
+.ucp-diagram-container {
+    padding: 2rem 0;
+    margin: 2rem auto;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: inset 0 0 20px rgba(155, 64, 234, 0.05);
+    max-width: 900px;
+}
+
+.ucp-svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
+}
+
+.diagram-box {
+    fill: #ffffff;
+    stroke: #9B40EA;
+    stroke-width: 2;
+    transition: fill 0.3s ease;
+}
+
+.diagram-box-group:hover .diagram-box {
+    fill: #fdfaff;
+}
+
+.diagram-text {
+    font-size: 22px;
+    font-weight: 800;
+    fill: #333233;
+    text-anchor: middle;
+    font-family: 'League Spartan', sans-serif;
+}
+
+.diagram-text-small {
+    font-size: 16px;
+    font-weight: 500;
+    fill: #9B40EA;
+    text-anchor: middle;
+}
+
+.flow-path {
+    fill: none;
+    stroke: #9B40EA;
+    stroke-width: 3;
+    stroke-linecap: butt;
+    marker-end: url(#arrowhead);
+}
+
+.label-text {
+    font-size: 14px;
+    font-weight: 600;
+    fill: #333233;
+    text-anchor: middle;
+}
+
+.label-text-small {
+    font-size: 12px;
+    font-weight: 600;
+    fill: #333233;
+    text-anchor: middle;
+}
+
+.diagram-box-group {
+    cursor: default;
 }

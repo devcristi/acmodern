@@ -10,6 +10,20 @@
 </head>
 <body>
 
+    <nav class="navbar navbar-expand navbar-dark bg-primary fixed-top shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="#hero">
+                <i class="bi bi-cpu me-2"></i> AC Course
+            </a>
+            
+            <!-- <div class="navbar-nav d-flex flex-row gap-2">
+                <a class="nav-link px-2" href="#fundamente">Structură</a>
+                <a class="nav-link px-2" href="#ciclu">Ciclu</a>
+                <a class="nav-link px-2" href="#interfete">Memorie</a>
+            </div> -->
+        </div>
+    </nav>
+
     <div class="hero-section" id="hero">
         <div class="hero-content">
             <span class="badge bg-light text-primary mb-2">Arhitectura Calculatoarelor</span>
@@ -26,7 +40,7 @@
 
     <div class="content-container hidden" id="main-content">
 
-        <div class="topic-card fade-in-card">
+        <div class="topic-card fade-in-card" id="fundamente">
             <div class="card-header-custom">
                 <i class="bi bi-cpu"></i> 1. Fundamente și Structură
             </div>
@@ -121,7 +135,7 @@
             </div>
         </div>
 
-        <div class="topic-card fade-in-card">
+        <div class="topic-card fade-in-card" id="ciclu">
             <div class="card-header-custom">
                 <i class="bi bi-arrow-repeat"></i> 2. Ciclul Instrucțiune și Sincronizarea
             </div>
@@ -174,7 +188,7 @@
             </div>
         </div>
 
-        <div class="topic-card fade-in-card">
+        <div class="topic-card fade-in-card" id="interfete">
             <div class="card-header-custom">
                 <i class="bi bi-hdd-network"></i> 3. Interfațare și Arhitecturi de Memorie
             </div>

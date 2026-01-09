@@ -9,38 +9,19 @@ class Hero
     {
         return `
             <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
-                <div class="container-fluid">
+            <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top gsap-reveal">
+                <div class="container px-4">
                     <!-- Logo -->
-                    <a class="navbar-brand d-flex align-items-center" href="#hero">
+                    <a class="navbar-brand d-flex align-items-center me-4" href="#hero">
                         <i class="fas fa-microchip me-2"></i>
                         <span class="fw-bold">AC Course</span>
                     </a>
 
-                    <!-- Hamburger Toggle -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#heroNavbar" aria-controls="heroNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <!-- Navbar links -->
-                    <div class="collapse navbar-collapse" id="heroNavbar">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a href="#fundamente" class="nav-link">
-                                    Structură
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#ciclu" class="nav-link">
-                                    Ciclu
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#interfete" class="nav-link">
-                                    Memorie
-                                </a>
-                            </li>
-                        </ul>
+                    <!-- Navbar links (Always visible on same row) -->
+                    <div class="navbar-nav d-flex flex-row gap-4">
+                        <a href="#fundamente" class="nav-link">Structură</a>
+                        <a href="#ciclu" class="nav-link">Ciclu</a>
+                        <a href="#interfete" class="nav-link">Memorie</a>
                     </div>
                 </div>
             </nav>
@@ -50,25 +31,25 @@ class Hero
                 <div class="container-fluid">
                     <div class="row align-items-center min-vh-100">
                         <!-- Left Side - Text (70%) -->
-                        <div class="col-lg-7 col-md-6 col-12 hero-text-side">
+                        <div class="col-lg-7 col-md-6 col-12 hero-text-side gsap-reveal">
                             <div class="hero-content ps-lg-5">
                                 <h1 class="display-1 fw-bold mb-4">
-                                    AC Modern
+                                    <span class="parallax-fast d-inline-block">AC Modern</span>
                                     <br>
-                                    Curs 4
+                                    <span class="parallax-slow d-inline-block">Curs 4</span>
                                 </h1>
                                 <p class="lead mb-4 fw-regular">
                                     Fundamente privind arhitectura UCP. </br>
                                     Structură, Funcționare Ciclică, Interfațare și Organizare.
                                 </p>
-                                <button class="btn btn-lg btn-light">
+                                <a href="#fundamente" class="btn btn-lg btn-light" style="font-weight: 600; position: relative; z-index: 10;">
                                     Începe studiul
-                                </button>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Right Side - Image (30%) -->
-                        <div class="col-lg-5 col-md-6 col-12 hero-image-side">
+                        <div class="col-lg-5 col-md-6 col-12 hero-image-side gsap-reveal">
                             <div class="hero-image-wrapper">
                                 <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=1000&fit=crop" 
                                      alt="Computer Architecture" 
@@ -95,7 +76,112 @@ class Hero
     {
         this.bindAnchorScroll();
         this.bindScrollState();
-        this.bindNavbarCollapse();
+        this.initGSAP();
+    }
+
+    initGSAP()
+    {
+        if (typeof gsap === 'undefined') return;
+
+        // Force elements to be visible before animating but keep opacity 0 via class
+        gsap.set(".gsap-reveal", { visibility: "visible" });
+
+        const tl = gsap.timeline({ 
+            defaults: { ease: "power3.out", duration: 1 } 
+        });
+
+        // Navbar animation
+        tl.to(".custom-navbar", {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            startAt: { y: -100, opacity: 0 },
+            onComplete: () => document.querySelector('.custom-navbar').classList.remove('gsap-reveal')
+        });
+
+        // Hero text animations (staggered children)
+        tl.to(".hero-text-side", {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            startAt: { y: 30, opacity: 0 },
+            onComplete: () => document.querySelector('.hero-text-side').classList.remove('gsap-reveal')
+        }, "-=0.4");
+
+        tl.from(".hero-text-side > .hero-content > *", {
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            clearProps: "all"
+        }, "-=0.4");
+
+        // Hero image animation
+        tl.to(".hero-image-side", {
+            scale: 1,
+            opacity: 1,
+            duration: 1.2,
+            startAt: { scale: 1.1, opacity: 0 },
+            onComplete: () => {
+                const imgSide = document.querySelector('.hero-image-side');
+                if (imgSide) imgSide.classList.remove('gsap-reveal');
+            }
+        }, "-=1");
+
+        // Smoother parallax on scroll for image and text
+        if (typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Image Parallax (Moves slightly down)
+            gsap.to(".hero-image", {
+                scrollTrigger: {
+                    trigger: ".hero-section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1.5
+                },
+                y: 150,
+                scale: 1.15,
+                ease: "none"
+            });
+
+            // Differential Parallax for Text
+            // "AC Modern" moves FAST up
+            gsap.to(".parallax-fast", {
+                scrollTrigger: {
+                    trigger: ".hero-section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1
+                },
+                y: -120,
+                ease: "none"
+            });
+
+            // "Curs 4" moves SLOWER up
+            gsap.to(".parallax-slow", {
+                scrollTrigger: {
+                    trigger: ".hero-section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1.2
+                },
+                y: -40,
+                ease: "none"
+            });
+
+            // Description moves slightly up
+            gsap.to(".hero-text-side .lead", {
+                scrollTrigger: {
+                    trigger: ".hero-section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1.4
+                },
+                y: -20,
+                ease: "none"
+            });
+        }
     }
 
     bindAnchorScroll()

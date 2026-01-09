@@ -9,7 +9,7 @@ class Interfete
     {
         return `
             <!-- Interfete Section -->
-            <section id="interfete" class="interfete-section">
+            <section id="interfete" class="interfete-section gsap-reveal">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
@@ -25,7 +25,7 @@ class Interfete
 
                             <div class="row g-4 mb-5">
                                 <div class="col-lg-6">
-                                    <div class="architecture-card von-neumann">
+                                    <div class="architecture-card von-neumann gsap-reveal">
                                         <div class="arch-icon">
                                             <i class="bi bi-diagram-2"></i>
                                         </div>
@@ -69,7 +69,7 @@ class Interfete
                                 </div>
 
                                 <div class="col-lg-6">
-                                    <div class="architecture-card harvard">
+                                    <div class="architecture-card harvard gsap-reveal">
                                         <div class="arch-icon">
                                             <i class="bi bi-diagram-3"></i>
                                         </div>
@@ -122,7 +122,7 @@ class Interfete
                                 </div>
                             </div>
 
-                            <div class="technical-note">
+                            <div class="technical-note gsap-reveal">
                                 <div class="note-header">
                                     <i class="bi bi-tools"></i>
                                     <h5>Rolul Circuitelor Tampon (Buffers) de Interfață</h5>
@@ -174,6 +174,83 @@ class Interfete
         `;
     }
 
+    initGSAP() 
+    {
+        if (!window.gsap || !window.ScrollTrigger) return;
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Prepare visibility: keep section visible, and animate children from hidden only when triggered
+        const revealEls = Array.from(this.element.querySelectorAll('.gsap-reveal')).filter(el => el !== this.element);
+        gsap.set(this.element, { autoAlpha: 1 });
+
+        // Generic fade-in for any remaining gsap-reveal children
+        gsap.from(revealEls, {
+            scrollTrigger: {
+                trigger: this.element,
+                start: "top 95%",
+            },
+            autoAlpha: 0,
+            y: 20,
+            duration: 0.8,
+            stagger: 0.15,
+            overwrite: true,
+            immediateRender: false
+        });
+
+        // Reveal section container
+        gsap.to(this.element, {
+            scrollTrigger: {
+                trigger: this.element,
+                start: "top 85%",
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            onComplete: () => this.element.classList.remove('gsap-reveal')
+        });
+
+        // Animate architecture cards
+        gsap.from(this.element.querySelectorAll('.architecture-card'), {
+            scrollTrigger: {
+                trigger: ".architecture-card",
+                start: "top 90%",
+            },
+            x: (i) => i === 0 ? -60 : 60,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.3,
+            ease: "power3.out",
+            immediateRender: false
+        });
+
+        // Animate technical note and param cards
+        gsap.to(this.element.querySelector('.technical-note'), {
+            scrollTrigger: {
+                trigger: ".technical-note",
+                start: "top 90%",
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1
+        });
+
+        gsap.from(this.element.querySelectorAll('.param-card'), {
+            scrollTrigger: {
+                trigger: ".technical-note",
+                start: "top 85%",
+            },
+            scale: 0.9,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "back.out(1.7)",
+            immediateRender: false
+        });
+
+        ScrollTrigger.refresh();
+    }
+
     mount(containerId)
     {
         const container = document.getElementById(containerId);
@@ -181,6 +258,27 @@ class Interfete
         
         container.innerHTML = this.render();
         this.element = container.querySelector('.interfete-section');
+
+        // Fallback: ensure everything is visible even if GSAP/ScrollTrigger fail to load
+        if (this.element) {
+            const reveals = this.element.querySelectorAll('.gsap-reveal');
+            reveals.forEach(el => {
+                el.style.opacity = '1';
+                el.style.visibility = 'visible';
+                el.style.removeProperty('transform');
+                el.style.removeProperty('will-change');
+            });
+            this.element.style.opacity = '1';
+            this.element.style.visibility = 'visible';
+        }
+
+        // Make sure the section is visible before animations
+        if (window.gsap && this.element) {
+            gsap.set(this.element, { autoAlpha: 1 });
+        }
+
+        // Initialize GSAP with a small delay
+        setTimeout(() => this.initGSAP(), 150);
     }
 }
 

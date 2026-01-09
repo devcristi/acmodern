@@ -12,10 +12,10 @@ class Fundamente
             <section id="fundamente" class="fundamente-section">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-12 fundamente-content">
+                        <div class="col-12 fundamente-content gsap-reveal">
                             <div class="section-header">
-                                <h2 class="section-title">Fundamente & Structură</h2>
-                                <p class="section-subtitle">Arhitectura de bază a unității centrale de procesare</p>
+                                <h2 class="section-title parallax-slow">Fundamente & Structură</h2>
+                                <p class="section-subtitle parallax-fast">Arhitectura de bază a unității centrale de procesare</p>
                             </div>
                             
                             <!-- Lead Paragraph -->
@@ -62,6 +62,56 @@ class Fundamente
                                             <li><strong>Unitatea de Control (UC):</strong> Automat de ordinul ≥ 2.</li>
                                         </ol>
                                         <p>Deoarece UC își modifică secvența de comenzi pe baza <strong>indicatorilor de condiții (Flags)</strong> primiți de la ALU (feedback), întregul procesor devine un <strong>Automat de Ordinul 3</strong>.</p>
+                                        
+                                        <!-- Animated Diagram -->
+                                        <div class="ucp-diagram-container">
+                                            <svg viewBox="0 0 800 400" class="ucp-svg">
+                                                <!-- Boxes -->
+                                                <g class="diagram-box-group alu-group">
+                                                    <rect x="50" y="100" width="250" height="150" rx="10" class="diagram-box" />
+                                                    <text x="175" y="165" class="diagram-text">UNITATE DE</text>
+                                                    <text x="175" y="190" class="diagram-text">PRELUCRARE</text>
+                                                    <text x="175" y="215" class="diagram-text-small">(ALU și registre)</text>
+                                                </g>
+
+                                                <g class="diagram-box-group uc-group">
+                                                    <rect x="500" y="100" width="250" height="150" rx="10" class="diagram-box" />
+                                                    <text x="625" y="165" class="diagram-text">UNITATE</text>
+                                                    <text x="625" y="190" class="diagram-text">DE</text>
+                                                    <text x="625" y="215" class="diagram-text">CONTROL</text>
+                                                </g>
+
+                                                <!-- Arrows / Paths -->
+                                                <!-- ALU to UC (Flags) -->
+                                                <path d="M 305 130 L 495 130" class="flow-path" id="path-flags" />
+                                                <text x="400" y="115" class="label-text">Indicatori de condiții</text>
+
+                                                <!-- UC to ALU (Commands) -->
+                                                <path d="M 495 220 L 305 220" class="flow-path" id="path-commands" />
+                                                <text x="400" y="245" class="label-text">Comenzi interne</text>
+
+                                                <!-- External ALU -->
+                                                <path d="M 175 100 L 175 10" class="flow-path" />
+                                                <text x="175" y="25" class="label-text">Ieșire date</text>
+
+                                                <path d="M 175 340 L 175 250" class="flow-path" />
+                                                <text x="175" y="365" class="label-text">Intrare date</text>
+
+                                                <!-- External UC -->
+                                                <path d="M 625 100 L 625 10" class="flow-path" />
+                                                <text x="625" y="25" class="label-text">Comenzi externe</text>
+
+                                                <path d="M 625 340 L 625 250" class="flow-path" />
+                                                <text x="625" y="365" class="label-text-small">Instrucțiuni & Stare</text>
+
+                                                <!-- Arrowheads (Markers) -->
+                                                <defs>
+                                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                                        <polygon points="0 0, 10 3.5, 0 7" fill="#9B40EA" />
+                                                    </marker>
+                                                </defs>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +173,124 @@ class Fundamente
             this.element.innerHTML = this.render();
             this.initAccordion();
             this.initTabs();
+            this.initGSAP();
         }
+    }
+
+    initGSAP()
+    {
+        if (typeof gsap === 'undefined') return;
+
+        // Force EVERYTHING in this section to be visible
+        gsap.set(".fundamente-section, .fundamente-content, .accordion-item-custom", { 
+            visibility: "visible", 
+            opacity: 1 
+        });
+
+        // Parallax for titles - REVERSED (moves opposite to scroll)
+        if (typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.to(".fundamente-section .parallax-slow", {
+                scrollTrigger: {
+                    trigger: ".fundamente-section",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1.5
+                },
+                y: -100, 
+                ease: "none"
+            });
+
+            gsap.to(".fundamente-section .parallax-fast", {
+                scrollTrigger: {
+                    trigger: ".fundamente-section",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1
+                },
+                y: -180, 
+                ease: "none"
+            });
+
+            // Slide content in/out effect (very cool)
+            gsap.from(".fundamente-content", {
+                scrollTrigger: {
+                    trigger: ".fundamente-section",
+                    start: "top 95%",
+                    end: "top 30%",
+                    scrub: 1
+                },
+                scale: 0.95,
+                opacity: 0.5,
+                x: -30,
+                ease: "power1.inOut"
+            });
+        }
+
+        // Header and Card reveal
+        gsap.from(".fundamente-section .section-header, .fundamente-section .accordion-item-custom", {
+            scrollTrigger: {
+                trigger: ".fundamente-section",
+                start: "top 90%",
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power2.out",
+            clearProps: "all"
+        });
+
+        // Initial diagram setup (hidden initially for entry animation)
+        gsap.set(".diagram-box-group", { opacity: 0, scale: 0.8 });
+    }
+
+    animateDiagram()
+    {
+        if (typeof gsap === 'undefined') return;
+
+        // Reveal boxes sequentially
+        gsap.to(".diagram-box-group", {
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            stagger: 0.3,
+            ease: "back.out(1.7)",
+            clearProps: "all"
+        });
+
+        // Pulse boxes loop
+        gsap.to(".diagram-box", {
+            strokeWidth: 4,
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+
+        // Animate flow paths (energy pulse)
+        const paths = document.querySelectorAll('.flow-path');
+        paths.forEach(path => {
+            // Create a flowing dash effect
+            path.style.strokeDasharray = "15, 25";
+            
+            gsap.to(path, {
+                strokeDashoffset: -200,
+                duration: 4,
+                repeat: -1,
+                ease: "none"
+            });
+
+            // Add a slight color pulse to the arrows
+            gsap.to(path, {
+                stroke: "#7A2DC2",
+                duration: 1.5,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+        });
     }
 
     initAccordion()
@@ -149,6 +316,18 @@ class Fundamente
                 if (!isOpen) {
                     content.classList.add('active');
                     icon.style.transform = 'rotate(180deg)';
+
+                    // If it's the diagram accordion, trigger animation
+                    if (accordionId === "2") {
+                        this.animateDiagram();
+                    }
+                }
+
+                // Refresh ScrollTrigger as the page height has changed
+                if (window.ScrollTrigger) {
+                    setTimeout(() => {
+                        ScrollTrigger.refresh();
+                    }, 400); // Wait for CSS transition to finish (0.4s)
                 }
             });
         });
@@ -173,6 +352,11 @@ class Fundamente
                 // Add active class to clicked button and corresponding pane
                 button.classList.add('active');
                 this.element.querySelector(`[data-pane="${tabId}"]`).classList.add('active');
+
+                // Refresh ScrollTrigger
+                if (window.ScrollTrigger) {
+                    ScrollTrigger.refresh();
+                }
             });
         });
     }

@@ -1,5 +1,27 @@
 /* DESIGN MODERN & CURAT */
 
+.navbar {
+    background-color: #5b3cc4 !important;
+    padding: 0.8rem 0;
+    z-index: 1100;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffd700 !important;
+}
+
 body {
     font-family: 'Segoe UI', 'Roboto', sans-serif;
     background-color: #f8f9fa;

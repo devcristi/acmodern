@@ -18,16 +18,14 @@
 
 * {
     font-family: 'League Spartan', sans-serif;
-    transition: none !important;
-    animation: none !important;
 }
 
-*::before,
-*::after {
-    transition: none !important;
-    animation: none !important;
+.gsap-reveal {
+    opacity: 0;
+    visibility: hidden;
 }
 
 body {
     font-family: 'League Spartan', sans-serif;
+    overflow-x: hidden;
 }
