@@ -65,51 +65,53 @@ class Fundamente
                                         
                                         <!-- Animated Diagram -->
                                         <div class="ucp-diagram-container">
-                                            <svg viewBox="0 0 800 400" class="ucp-svg">
+                                            <svg viewBox="0 0 800 480" class="ucp-svg">
+                                                <!-- Arrowheads (Markers) - defined first -->
+                                                <defs>
+                                                    <marker id="arrowhead" markerWidth="12" markerHeight="9" refX="11" refY="4.5" orient="auto">
+                                                        <polygon points="0 0, 12 4.5, 0 9" fill="#9B40EA" />
+                                                    </marker>
+                                                </defs>
+
                                                 <!-- Boxes -->
                                                 <g class="diagram-box-group alu-group">
-                                                    <rect x="50" y="100" width="250" height="150" rx="10" class="diagram-box" />
-                                                    <text x="175" y="165" class="diagram-text">UNITATE DE</text>
-                                                    <text x="175" y="190" class="diagram-text">PRELUCRARE</text>
-                                                    <text x="175" y="215" class="diagram-text-small">(ALU și registre)</text>
+                                                    <rect x="50" y="160" width="250" height="150" rx="10" class="diagram-box" />
+                                                    <text x="175" y="225" class="diagram-text">UNITATE DE</text>
+                                                    <text x="175" y="250" class="diagram-text">PRELUCRARE</text>
+                                                    <text x="175" y="275" class="diagram-text-small">(ALU și registre)</text>
                                                 </g>
 
                                                 <g class="diagram-box-group uc-group">
-                                                    <rect x="500" y="100" width="250" height="150" rx="10" class="diagram-box" />
-                                                    <text x="625" y="165" class="diagram-text">UNITATE</text>
-                                                    <text x="625" y="190" class="diagram-text">DE</text>
-                                                    <text x="625" y="215" class="diagram-text">CONTROL</text>
+                                                    <rect x="500" y="160" width="250" height="150" rx="10" class="diagram-box" />
+                                                    <text x="625" y="225" class="diagram-text">UNITATE</text>
+                                                    <text x="625" y="250" class="diagram-text">DE</text>
+                                                    <text x="625" y="275" class="diagram-text">CONTROL</text>
                                                 </g>
 
                                                 <!-- Arrows / Paths -->
-                                                <!-- ALU to UC (Flags) -->
-                                                <path d="M 305 130 L 495 130" class="flow-path" id="path-flags" />
-                                                <text x="400" y="115" class="label-text">Indicatori de condiții</text>
+                                                <!-- ALU to UC (Flags) - top arrow -->
+                                                <text x="400" y="175" class="label-text">Indicatori de condiții</text>
+                                                <path d="M 300 195 L 500 195" class="flow-path" id="path-flags" />
 
-                                                <!-- UC to ALU (Commands) -->
-                                                <path d="M 495 220 L 305 220" class="flow-path" id="path-commands" />
-                                                <text x="400" y="245" class="label-text">Comenzi interne</text>
+                                                <!-- UC to ALU (Commands) - bottom arrow -->
+                                                <path d="M 500 275 L 300 275" class="flow-path" id="path-commands" />
+                                                <text x="400" y="300" class="label-text">Comenzi interne</text>
 
-                                                <!-- External ALU -->
-                                                <path d="M 175 100 L 175 10" class="flow-path" />
-                                                <text x="175" y="25" class="label-text">Ieșire date</text>
+                                                <!-- External ALU - top (output) -->
+                                                <text x="175" y="45" class="label-text">Ieșire date</text>
+                                                <path d="M 175 155 L 175 60" class="flow-path" />
 
-                                                <path d="M 175 340 L 175 250" class="flow-path" />
-                                                <text x="175" y="365" class="label-text">Intrare date</text>
+                                                <!-- External ALU - bottom (input) -->
+                                                <path d="M 175 425 L 175 315" class="flow-path" />
+                                                <text x="175" y="450" class="label-text">Intrare date</text>
 
-                                                <!-- External UC -->
-                                                <path d="M 625 100 L 625 10" class="flow-path" />
-                                                <text x="625" y="25" class="label-text">Comenzi externe</text>
+                                                <!-- External UC - top (output) -->
+                                                <text x="625" y="45" class="label-text">Comenzi externe</text>
+                                                <path d="M 625 155 L 625 60" class="flow-path" />
 
-                                                <path d="M 625 340 L 625 250" class="flow-path" />
-                                                <text x="625" y="365" class="label-text-small">Instrucțiuni & Stare</text>
-
-                                                <!-- Arrowheads (Markers) -->
-                                                <defs>
-                                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-                                                        <polygon points="0 0, 10 3.5, 0 7" fill="#9B40EA" />
-                                                    </marker>
-                                                </defs>
+                                                <!-- External UC - bottom (input) -->
+                                                <path d="M 625 425 L 625 315" class="flow-path" />
+                                                <text x="625" y="450" class="label-text-small">Instrucțiuni & Stare</text>
                                             </svg>
                                         </div>
                                     </div>
@@ -244,6 +246,9 @@ class Fundamente
 
         // Initial diagram setup (hidden initially for entry animation)
         gsap.set(".diagram-box-group", { opacity: 0, scale: 0.8 });
+
+        // Scroll-triggered line draw animation for standalone UCP diagram
+        this.initScrollDiagram();
     }
 
     animateDiagram()
@@ -260,12 +265,12 @@ class Fundamente
             clearProps: "all"
         });
 
-        // Pulse boxes loop
+        // Pulse boxes - single pulse
         gsap.to(".diagram-box", {
-            strokeWidth: 4,
-            duration: 1.5,
-            repeat: -1,
+            strokeWidth: 3,
+            duration: 2,
             yoyo: true,
+            repeat: 1,
             ease: "sine.inOut"
         });
 
@@ -290,6 +295,45 @@ class Fundamente
                 yoyo: true,
                 ease: "sine.inOut"
             });
+        });
+    }
+
+    initScrollDiagram()
+    {
+        const svgContainer = this.element?.querySelector('.ucp-scroll-diagram');
+        if (!svgContainer || !window.gsap || !window.ScrollTrigger) return;
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const lines = svgContainer.querySelectorAll('.scroll-line');
+        const boxes = svgContainer.querySelectorAll('.scroll-box rect');
+        const labels = svgContainer.querySelectorAll('.line-label, .line-label-small, .box-title');
+
+        // Set initial state: lines hidden via stroke-dashoffset
+        lines.forEach(line => {
+            const length = line.getTotalLength();
+            gsap.set(line, { strokeDasharray: length, strokeDashoffset: length });
+        });
+        gsap.set(boxes, { opacity: 0.3, scale: 0.95, transformOrigin: 'center' });
+        gsap.set(labels, { opacity: 0 });
+
+        // Create scroll-triggered timeline
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: svgContainer,
+                start: 'top 85%',
+                end: 'bottom 40%',
+                scrub: 1
+            }
+        });
+
+        // Animate boxes appearing
+        tl.to(boxes, { opacity: 1, scale: 1, duration: 0.3, stagger: 0.1 }, 0);
+        tl.to(labels, { opacity: 1, duration: 0.3 }, 0.1);
+
+        // Draw lines sequentially
+        lines.forEach((line, i) => {
+            tl.to(line, { strokeDashoffset: 0, duration: 0.25, ease: 'power1.inOut' }, 0.15 + i * 0.08);
         });
     }
 

@@ -90,7 +90,7 @@
 .flow-diagram-card {
     background: #ffffff;
     border-radius: 16px;
-    padding: 2.5rem 3rem;
+    padding: 2rem 2.5rem;
     margin-bottom: 3rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     border-left: 4px solid #9B40EA;
@@ -98,157 +98,241 @@
 }
 
 .flow-card-header h5 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .flow-card-header p {
-    color: #333;
-    margin-bottom: 1.5rem;
+    color: #555;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
 }
 
-.flow-diagram {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-    padding: 1rem 0 1rem;
-    max-width: 520px;
+.flow-svg {
+    display: block;
+    max-width: 380px;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
 }
 
-.flow-node {
-    background: #f8f8fb;
-    border: 2px solid #d8d2ef;
-    border-radius: 14px;
-    padding: 1.25rem 1.5rem;
-    text-align: center;
-    max-width: 320px;
-    width: 100%;
+.flow-svg .node-start {
+    fill: linear-gradient(135deg, #d9cff9 0%, #f0eafe 100%);
+    fill: #e8dff5;
+    stroke: #9B40EA;
+    stroke-width: 2;
+}
+
+.flow-svg .node-process {
+    fill: #f8f8fb;
+    stroke: #d8d2ef;
+    stroke-width: 2;
+}
+
+.flow-svg .node-decision {
+    fill: #ffffff;
+    stroke: #9B40EA;
+    stroke-width: 2;
+    stroke-dasharray: 6 3;
+}
+
+.flow-svg .node-stop {
+    fill: #fce1e3;
+    stroke: #dc3545;
+    stroke-width: 2;
+}
+
+.flow-svg .node-text {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 13px;
     font-weight: 600;
-    line-height: 1.6;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    fill: #333;
+    text-anchor: middle;
 }
 
-.flow-node small {
-    display: block;
-    margin-top: 0.4rem;
-    color: #555;
+.flow-svg .node-text-small {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 11px;
     font-weight: 500;
+    fill: #666;
+    text-anchor: middle;
 }
 
-.flow-node.start {
-    background: linear-gradient(135deg, #d9cff9 0%, #f0eafe 100%);
-    border-color: #9B40EA;
-    font-size: 1.1rem;
+.flow-svg .flow-line {
+    stroke: #9B40EA;
+    stroke-width: 2;
 }
 
-.flow-node.stop {
-    background: linear-gradient(135deg, #f8d7da 0%, #fce1e3 100%);
-    border-color: #dc3545;
-    font-size: 1.05rem;
+.flow-svg .flow-arrow {
+    fill: #9B40EA;
 }
 
-.flow-node.decision {
-    width: 160px;
-    height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ffffff;
-    border: 2px dashed #9B40EA;
-    transform: rotate(45deg);
-    border-radius: 16px;
-    position: relative;
-    padding: 0;
-}
-
-.flow-node.decision .decision-label,
-.flow-node.decision .decision-answers {
-    transform: rotate(-45deg);
-    text-align: center;
-}
-
-.flow-node.decision .decision-label {
-    font-weight: 800;
-    margin-bottom: 0.4rem;
-    display: block;
-}
-
-.flow-node.decision .decision-answers {
-    display: flex;
-    justify-content: space-between;
-    gap: 1.5rem;
+.flow-svg .label-nu {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 12px;
     font-weight: 700;
+    fill: #dc3545;
+    text-anchor: middle;
 }
 
-.flow-node.decision .answer-no {
-    color: #dc3545;
+.flow-svg .label-da {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    fill: #28a745;
+    text-anchor: start;
 }
 
-.flow-node.decision .answer-yes {
-    color: #28a745;
+/* Animation states */
+.flow-svg .node-inactive {
+    filter: grayscale(80%) brightness(1.1);
+    opacity: 0.5;
 }
 
-.flow-connector {
-    width: 2px;
-    height: 56px;
-    background: linear-gradient(180deg, #d2c8ef 0%, #c2b6f4 100%);
-    border-radius: 8px;
-    position: relative;
+.flow-svg .node-active {
+    filter: drop-shadow(0 0 8px rgba(155, 64, 234, 0.6));
 }
 
-.flow-connector::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: -6px;
-    width: 14px;
-    height: 14px;
-    border-left: 3px solid #c2b6f4;
-    border-bottom: 3px solid #c2b6f4;
-    transform: rotate(-45deg);
+.flow-svg .line-inactive {
+    stroke: #ccc;
+    opacity: 0.4;
 }
 
-.flow-loop {
-    position: absolute;
-    left: -60px;
-    top: 80px;
-    width: 40px;
-    height: 320px;
-    pointer-events: none;
+.flow-svg .line-active {
+    filter: drop-shadow(0 0 4px rgba(155, 64, 234, 0.5));
 }
 
-.flow-loop .loop-line {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(180deg, #d2c8ef 0%, #c2b6f4 100%);
-    border-radius: 6px;
+.flow-svg .label-inactive {
+    opacity: 0.3;
 }
 
-.flow-loop .loop-arrow {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 6px) rotate(-135deg);
-    width: 14px;
-    height: 14px;
-    border-left: 3px solid #c2b6f4;
-    border-bottom: 3px solid #c2b6f4;
+/* Processor Block Diagram */
+.processor-block-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #9B40EA;
 }
 
-.flow-loop .loop-label {
-    position: absolute;
-    top: 50%;
-    left: -18px;
-    transform: translate(-100%, -50%);
-    font-weight: 800;
-    color: #dc3545;
+.processor-diagrams {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+
+.proc-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.proc-svg {
+    width: 180px;
+    height: auto;
+}
+
+.proc-diagram .diagram-label {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 0.5rem;
+}
+
+.proc-box {
+    fill: #f8f8fb;
+    stroke: #333;
+    stroke-width: 2;
+}
+
+.proc-ucp-text {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.proc-line {
+    stroke: #333;
+    stroke-width: 1.5;
+}
+
+.proc-arrow-up,
+.proc-arrow-down {
+    fill: #333;
+}
+
+.proc-label {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.proc-label-sub {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.proc-label-small {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    fill: #555;
+    text-anchor: middle;
+}
+
+.proc-label-small-sub {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    fill: #555;
+    text-anchor: middle;
+}
+
+.proc-buffer {
+    fill: none;
+    stroke: #333;
+    stroke-width: 1.5;
+}
+
+.proc-label-bus {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    fill: #555;
+    text-anchor: middle;
+}
+
+.proc-diagram-label {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.proc-legend {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.proc-legend p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0.3rem 0;
 }
 
 .cycle-controls {
@@ -431,13 +515,29 @@
 }
 
 /* Mobile responsive */
+@media (max-width: 1400px) {
+    .ciclu-section {
+        padding: 150px 8rem 100px 8rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .ciclu-section {
+        padding: 120px 4rem 80px 4rem;
+    }
+
+    .section-title {
+        font-size: 3.5rem;
+    }
+}
+
 @media (max-width: 991px) {
     .ciclu-section {
         padding: 100px 2rem 50px 2rem;
     }
 
     .section-title {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .section-subtitle {
@@ -478,8 +578,9 @@
         padding: 1.5rem 2rem;
     }
 
-    .flow-diagram-card {
-        padding: 2rem 2rem;
+    .flow-diagram-card,
+    .processor-block-card {
+        padding: 1.5rem;
     }
 
     .flow-node {
@@ -490,24 +591,82 @@
         left: -90px;
         height: 340px;
     }
+
+    .cycle-main-title {
+        font-size: 1.6rem;
+    }
+
+    .proc-legend {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .ciclu-section {
+        padding: 80px 1.5rem 40px 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .info-card-ciclu,
+    .time-definitions {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .info-card-title {
+        font-size: 1.1rem;
+    }
+
+    .sync-list li {
+        font-size: 0.95rem;
+        padding: 0.5rem 0;
+    }
+
+    .flow-svg,
+    .proc-svg {
+        max-width: 100%;
+        height: auto;
+    }
 }
 
 @media (max-width: 576px) {
+    .ciclu-section {
+        padding: 70px 1rem 30px 1rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+
     .cycle-controls {
         grid-template-columns: 1fr;
     }
 
     .cycle-main-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+
+    .cycle-viewer {
+        padding: 1.25rem 1rem;
     }
 
     .step-icon {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
     }
 
     .step-icon i {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .cycle-step h5 {
+        font-size: 1.2rem;
     }
 
     .flow-node.decision {
@@ -517,5 +676,50 @@
 
     .flow-loop {
         display: none;
+    }
+
+    .info-card-ciclu,
+    .time-definitions {
+        padding: 1rem 1.25rem;
+    }
+
+    .info-card-title {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .sync-list li {
+        font-size: 0.85rem;
+    }
+
+    .flow-diagram-card,
+    .processor-block-card {
+        padding: 1rem;
+    }
+
+    .flow-card-header h5 {
+        font-size: 1.1rem;
+    }
+
+    .flow-card-header p {
+        font-size: 0.85rem;
+    }
+
+    .definitions-title {
+        font-size: 1rem;
+    }
+
+    .definitions-list li {
+        font-size: 0.85rem;
+    }
+
+    .proc-legend {
+        font-size: 0.75rem;
+    }
+
+    .proc-legend p {
+        margin-bottom: 0.25rem;
     }
 }

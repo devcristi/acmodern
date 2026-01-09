@@ -299,13 +299,37 @@
 }
 
 /* Mobile responsive */
+@media (max-width: 1400px) {
+    .fundamente-section {
+        padding: 150px 8rem 100px 8rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .fundamente-section {
+        padding: 120px 4rem 80px 4rem;
+    }
+
+    .section-title {
+        font-size: 3.5rem;
+    }
+
+    .lead-text {
+        padding: 2rem;
+    }
+
+    .tabs-content {
+        padding: 2rem;
+    }
+}
+
 @media (max-width: 991px) {
     .fundamente-section {
         padding: 100px 2rem 50px 2rem;
     }
 
     .section-title {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .section-subtitle {
@@ -319,6 +343,157 @@
 
     .content-card {
         padding: 2rem 1.5rem;
+    }
+
+    .lead-text {
+        padding: 1.5rem;
+    }
+
+    .tabs-nav {
+        flex-wrap: wrap;
+    }
+
+    .tab-button {
+        flex: 1 1 50%;
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .tabs-content {
+        padding: 1.5rem;
+    }
+
+    .accordion-header-custom {
+        padding: 1.25rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .accordion-content {
+        padding: 0 1.5rem;
+    }
+
+    .accordion-content.active {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+
+    .section-subtitle-small {
+        font-size: 1.4rem;
+    }
+
+    .cards-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .fundamente-section {
+        padding: 80px 1.5rem 40px 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .tab-button {
+        flex: 1 1 100%;
+        padding: 0.85rem 1.25rem;
+        font-size: 0.9rem;
+    }
+
+    .tab-button span {
+        display: none;
+    }
+
+    .accordion-header-custom {
+        padding: 1rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .custom-list li {
+        padding: 0.6rem 0;
+        padding-left: 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .info-box {
+        padding: 1rem;
+    }
+
+    .section-subtitle-small {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .fundamente-section {
+        padding: 70px 1rem 30px 1rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .lead-text {
+        padding: 1rem 1.25rem;
+    }
+
+    .lead-text p {
+        font-size: 1rem;
+    }
+
+    .accordion-header-custom {
+        padding: 0.85rem 1rem;
+        font-size: 0.85rem;
+        gap: 0.75rem;
+    }
+
+    .accordion-header-custom i:first-child {
+        font-size: 1.1rem;
+    }
+
+    .accordion-content {
+        padding: 0 1rem;
+    }
+
+    .accordion-content.active {
+        padding: 0 1rem 1rem 1rem;
+    }
+
+    .custom-list li {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    .tabs-content {
+        padding: 1rem;
+    }
+
+    .info-card {
+        padding: 1rem;
+    }
+
+    .info-card strong {
+        font-size: 1rem;
+    }
+
+    .info-card p {
+        font-size: 0.85rem;
+    }
+
+    .section-subtitle-small {
+        font-size: 1rem;
     }
 }
 
@@ -367,8 +542,8 @@
 .flow-path {
     fill: none;
     stroke: #9B40EA;
-    stroke-width: 3;
-    stroke-linecap: butt;
+    stroke-width: 2.5;
+    stroke-linecap: round;
     marker-end: url(#arrowhead);
 }
 
@@ -388,4 +563,108 @@
 
 .diagram-box-group {
     cursor: default;
+}
+
+/* Standalone Scroll-Animated UCP Diagram */
+.ucp-scroll-diagram-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    margin: 3rem 0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #9B40EA;
+}
+
+.diagram-card-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #333233;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.diagram-card-title i {
+    color: #9B40EA;
+}
+
+.diagram-card-subtitle {
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+}
+
+.ucp-scroll-diagram {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+.ucp-scroll-svg {
+    width: 100%;
+    height: auto;
+}
+
+.ucp-scroll-svg .scroll-box rect {
+    fill: #ffffff;
+    stroke: #9B40EA;
+    stroke-width: 2.5;
+}
+
+.ucp-scroll-svg .box-title {
+    font-size: 18px;
+    font-weight: 700;
+    fill: #333233;
+    text-anchor: middle;
+    font-family: 'League Spartan', sans-serif;
+}
+
+.ucp-scroll-svg .scroll-line {
+    fill: none;
+    stroke: url(#line-grad);
+    stroke-width: 3;
+    stroke-linecap: round;
+    marker-end: url(#arrow-scroll);
+}
+
+.ucp-scroll-svg .line-label {
+    font-size: 13px;
+    font-weight: 600;
+    fill: #333233;
+    text-anchor: middle;
+    font-family: 'League Spartan', sans-serif;
+}
+
+.ucp-scroll-svg .line-label-small {
+    font-size: 12px;
+    font-weight: 600;
+    fill: #666;
+    text-anchor: middle;
+    font-family: 'League Spartan', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .ucp-scroll-diagram-card {
+        padding: 1.5rem;
+    }
+    .diagram-card-title {
+        font-size: 1.2rem;
+    }
+    .ucp-scroll-diagram {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .ucp-scroll-diagram-card {
+        padding: 1rem;
+    }
+    .diagram-card-title {
+        font-size: 1rem;
+    }
+    .diagram-card-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
 }

@@ -9,7 +9,7 @@ class Hero
     {
         return `
             <!-- Navbar -->
-            <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top gsap-reveal">
+            <nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
                 <div class="container px-4">
                     <!-- Logo -->
                     <a class="navbar-brand d-flex align-items-center me-4" href="#hero">
@@ -17,11 +17,18 @@ class Hero
                         <span class="fw-bold">AC Course</span>
                     </a>
 
-                    <!-- Navbar links (Always visible on same row) -->
-                    <div class="navbar-nav d-flex flex-row gap-4">
-                        <a href="#fundamente" class="nav-link">Structură</a>
-                        <a href="#ciclu" class="nav-link">Ciclu</a>
-                        <a href="#interfete" class="nav-link">Memorie</a>
+                    <!-- Hamburger button for mobile -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Navbar links (Collapsible) -->
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <div class="navbar-nav ms-auto gap-lg-4 gap-2">
+                            <a href="#fundamente" class="nav-link">Structură</a>
+                            <a href="#ciclu" class="nav-link">Ciclu</a>
+                            <a href="#interfete" class="nav-link">Memorie</a>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -90,15 +97,6 @@ class Hero
             defaults: { ease: "power3.out", duration: 1 } 
         });
 
-        // Navbar animation
-        tl.to(".custom-navbar", {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            startAt: { y: -100, opacity: 0 },
-            onComplete: () => document.querySelector('.custom-navbar').classList.remove('gsap-reveal')
-        });
-
         // Hero text animations (staggered children)
         tl.to(".hero-text-side", {
             y: 0,
@@ -106,7 +104,7 @@ class Hero
             duration: 0.8,
             startAt: { y: 30, opacity: 0 },
             onComplete: () => document.querySelector('.hero-text-side').classList.remove('gsap-reveal')
-        }, "-=0.4");
+        });
 
         tl.from(".hero-text-side > .hero-content > *", {
             y: 20,

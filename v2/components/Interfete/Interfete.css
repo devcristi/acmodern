@@ -159,6 +159,15 @@
     gap: 1rem;
 }
 
+.harvard-diagram .diagram-component.cpu {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    border-color: #1e7e34;
+}
+
+.harvard-diagram .diagram-component.memory {
+    border-color: #28a745;
+}
+
 .diagram-row {
     display: flex;
     align-items: center;
@@ -259,6 +268,23 @@
         transparent 4px,
         #7A2DC2 4px,
         #7A2DC2 6px
+    );
+}
+
+/* Harvard green bus lines */
+.harvard-diagram .bus-line {
+    background: linear-gradient(90deg, #28a745 0%, #1e7e34 100%);
+}
+
+.harvard-diagram .bus-line.dual {
+    background: repeating-linear-gradient(
+        0deg,
+        #28a745,
+        #28a745 2px,
+        transparent 2px,
+        transparent 4px,
+        #1e7e34 4px,
+        #1e7e34 6px
     );
 }
 
@@ -377,6 +403,334 @@
 .con-item strong {
     display: block;
     margin-bottom: 0.25rem;
+}
+
+/* Architecture Comparison Diagram Card */
+.architecture-diagram-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #9B40EA;
+}
+
+.architecture-diagram-card .flow-card-header h5 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+}
+
+.architecture-diagram-card .flow-card-header p {
+    color: #555;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.arch-comparison-svg {
+    display: block;
+    max-width: 580px;
+    width: 100%;
+    height: auto;
+    margin: 1rem auto;
+}
+
+.arch-comparison-svg .arch-box {
+    fill: #ffffff;
+    stroke: #333;
+    stroke-width: 1.5;
+}
+
+.arch-comparison-svg .arch-box.filled {
+    fill: #f5f5f8;
+}
+
+.arch-comparison-svg .arch-title {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    fill: #222;
+    text-anchor: middle;
+}
+
+.arch-comparison-svg .arch-sub {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    fill: #444;
+    text-anchor: middle;
+}
+
+.arch-comparison-svg .arch-small {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    fill: #555;
+    text-anchor: middle;
+    font-style: italic;
+}
+
+.arch-comparison-svg .arch-label {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.arch-comparison-svg .arch-label-sm {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.arch-comparison-svg .arrow-block {
+    fill: #fff;
+    stroke: #333;
+    stroke-width: 1.5;
+}
+
+.arch-comparison-svg .label-title {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    fill: #222;
+    text-anchor: start;
+}
+
+.arch-comparison-svg .label-sub {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    fill: #444;
+    text-anchor: start;
+}
+
+.arch-comparison-svg .label-detail {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    fill: #666;
+    text-anchor: start;
+}
+
+.arch-comparison-svg .pointer-line {
+    stroke: #9B40EA;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 4px rgba(155, 64, 234, 0.6));
+}
+
+.arch-comparison-svg .pointer-arrow {
+    fill: #9B40EA;
+    filter: drop-shadow(0 0 4px rgba(155, 64, 234, 0.6));
+}
+
+.arch-comparison-svg .separator-line {
+    stroke: #9B40EA;
+    stroke-width: 2;
+    stroke-dasharray: 8 4;
+}
+
+.arch-comparison-svg .caption {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    fill: #555;
+    text-anchor: middle;
+}
+
+/* Buffer Diagram Card */
+.buffer-diagram-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+.buffer-svg {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    display: block;
+    margin: 1.5rem auto;
+}
+
+.buffer-svg .main-box {
+    fill: #fff;
+    stroke: #333;
+    stroke-width: 2;
+}
+
+.buffer-svg .ucp-box {
+    fill: #fafafa;
+}
+
+.buffer-svg .mem-box {
+    fill: #fafafa;
+}
+
+.buffer-svg .buffer-box {
+    fill: #fff;
+    stroke: #333;
+    stroke-width: 1.5;
+}
+
+.buffer-svg .mem-section {
+    fill: #fff;
+    stroke: #333;
+    stroke-width: 1.5;
+}
+
+.buffer-svg .box-title {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.buffer-svg .box-title-italic {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    font-style: italic;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.buffer-svg .buffer-text {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.buffer-svg .buffer-text-sm {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.buffer-svg .mem-text {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.buffer-svg .mem-text-sm {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.buffer-svg .bus-line-svg {
+    stroke: #333;
+    stroke-width: 2;
+    fill: none;
+}
+
+.buffer-svg .bus-arrow {
+    fill: #333;
+}
+
+.buffer-svg .bus-label {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    fill: #333;
+    text-anchor: start;
+}
+
+.buffer-info-note {
+    background: linear-gradient(135deg, rgba(155, 64, 234, 0.08) 0%, rgba(122, 45, 194, 0.05) 100%);
+    border-left: 4px solid #9B40EA;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.buffer-info-note p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+.buffer-info-note i {
+    color: #9B40EA;
+    margin-right: 0.5rem;
+}
+
+/* Buffer Main Title - like Ciclu */
+.buffer-main-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333233;
+    margin: 4rem 0 2rem 0;
+}
+
+/* Info Card Buffer - like Ciclu */
+.info-card-buffer {
+    background: #ffffff;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #9B40EA;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.info-card-buffer.highlight {
+    border-left-color: #ffc107;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.05) 0%, #ffffff 100%);
+}
+
+.info-card-buffer .info-card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333233;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-card-buffer .info-card-title i {
+    color: #9B40EA;
+    font-size: 1.3rem;
+}
+
+.info-card-buffer.highlight .info-card-title i {
+    color: #ffc107;
+}
+
+.buffer-list {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.buffer-list li {
+    padding: 0.6rem 0;
+    line-height: 1.7;
+    font-size: 1.02rem;
+    color: #444;
+}
+
+.buffer-note {
+    font-size: 1.02rem;
+    color: #444;
+    margin-bottom: 1rem;
+    line-height: 1.7;
 }
 
 /* Technical Note */
@@ -635,54 +989,44 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1400px) {
+    .interfete-section {
+        padding: 150px 8rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .interfete-section {
+        padding: 120px 4rem;
+    }
+
+    .arch-comparison-svg,
+    .buffer-svg {
+        max-width: 100%;
+    }
+}
+
 @media (max-width: 991px) {
     .interfete-section {
-        padding: 120px 3rem;
+        padding: 100px 2rem;
     }
 
     .interfete-section .section-title {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
     }
 
     .interfete-section .section-subtitle {
         font-size: 1.1rem;
-    }
-
-    .architecture-card {
-        padding: 2rem;
-    }
-
-    .architecture-card .arch-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 2rem;
-    }
-
-    .technical-note {
-        padding: 2rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .interfete-section {
-        padding: 80px 1.5rem;
-    }
-
-    .interfete-section .section-title {
-        font-size: 1.75rem;
-    }
-
-    .interfete-section .section-subtitle {
-        font-size: 1rem;
+        margin-bottom: 2rem;
     }
 
     .interfete-section .lead-text {
-        padding-left: 1.5rem;
-        font-size: 1rem;
+        margin-bottom: 2rem;
     }
 
     .architecture-card {
-        padding: 1.5rem;
+        padding: 1.75rem;
+        margin-bottom: 1.5rem;
     }
 
     .architecture-card .arch-icon {
@@ -692,11 +1036,181 @@
     }
 
     .architecture-card .arch-title {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
+    }
+
+    .arch-diagram {
+        min-height: 100px;
+        gap: 1rem;
+    }
+
+    .diagram-component {
+        padding: 0.75rem 1rem;
+    }
+
+    .bus-line.single,
+    .bus-line.dual {
+        width: 60px;
+    }
+
+    .buffer-main-title {
+        font-size: 1.6rem;
+        margin: 3rem 0 1.5rem 0;
+    }
+
+    .info-card-buffer {
+        padding: 1.5rem 1.75rem;
+    }
+
+    .buffer-diagram-card {
+        padding: 1.5rem;
+    }
+
+    .buffer-svg {
+        max-width: 100%;
+    }
+
+    .architecture-diagram-card {
+        padding: 1.5rem;
     }
 
     .technical-note {
-        padding: 1.5rem;
+        padding: 1.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .interfete-section {
+        padding: 80px 1.5rem;
+    }
+
+    .interfete-section .section-title {
+        font-size: 2rem;
+    }
+
+    .interfete-section .subsection-title {
+        font-size: 1.4rem;
+    }
+
+    .architecture-card .pros-cons {
+        flex-direction: column;
+    }
+
+    .arch-comparison-svg {
+        min-height: 300px;
+    }
+
+    .buffer-svg {
+        min-height: 280px;
+    }
+
+    /* Scale down SVG text */
+    .arch-comparison-svg .arch-title,
+    .buffer-svg .box-title {
+        font-size: 12px;
+    }
+
+    .arch-comparison-svg .arch-label,
+    .buffer-svg .buffer-text {
+        font-size: 9px;
+    }
+
+    .arch-comparison-svg .label-title {
+        font-size: 12px;
+    }
+
+    .arch-comparison-svg .label-sub,
+    .arch-comparison-svg .label-detail {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .interfete-section {
+        padding: 70px 1rem;
+    }
+
+    .interfete-section .section-title {
+        font-size: 1.6rem;
+    }
+
+    .interfete-section .section-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .interfete-section .lead-text {
+        padding-left: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .interfete-section .subsection-title {
+        font-size: 1.2rem;
+    }
+
+    .architecture-card {
+        padding: 1.25rem;
+    }
+
+    .architecture-card .arch-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .architecture-card .arch-title {
+        font-size: 1.15rem;
+    }
+
+    .architecture-card .arch-description {
+        font-size: 0.95rem;
+    }
+
+    .characteristics h6,
+    .pros-cons .pro-item strong,
+    .pros-cons .con-item strong {
+        font-size: 0.9rem;
+    }
+
+    .characteristics ul li,
+    .pros-cons .pro-item,
+    .pros-cons .con-item {
+        font-size: 0.85rem;
+    }
+
+    .buffer-main-title {
+        font-size: 1.3rem;
+        margin: 2rem 0 1rem 0;
+    }
+
+    .info-card-buffer {
+        padding: 1.25rem;
+    }
+
+    .info-card-buffer .info-card-title {
+        font-size: 1rem;
+    }
+
+    .buffer-list li {
+        font-size: 0.9rem;
+        padding: 0.4rem 0;
+    }
+
+    .buffer-diagram-card,
+    .architecture-diagram-card {
+        padding: 1rem;
+    }
+
+    .flow-card-header h5 {
+        font-size: 1.1rem;
+    }
+
+    .flow-card-header p {
+        font-size: 0.85rem;
+    }
+
+    .technical-note {
+        padding: 1.25rem;
     }
 
     .technical-note .note-header {
@@ -705,12 +1219,29 @@
         gap: 0.5rem;
     }
 
-    .param-card .param-icon {
-        width: 50px;
-        height: 50px;
+    .technical-note .note-header h5 {
+        font-size: 1.1rem;
     }
 
-    .param-card .param-icon i {
-        font-size: 1.5rem;
+    .param-card {
+        padding: 1rem;
+    }
+
+    .param-card h6 {
+        font-size: 1rem;
+    }
+
+    .buffer-info-note {
+        padding: 1rem;
+    }
+
+    .buffer-info-note p {
+        font-size: 0.85rem;
+    }
+
+    /* Hide complex SVG labels on very small screens */
+    .arch-comparison-svg .bus-label,
+    .buffer-svg .bus-label {
+        font-size: 8px;
     }
 }

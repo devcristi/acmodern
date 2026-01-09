@@ -25,6 +25,13 @@
     visibility: hidden;
 }
 
+/* Ensure navbar collapse content is always visible when shown */
+.custom-navbar .navbar-collapse .nav-link,
+.custom-navbar .navbar-collapse .navbar-nav {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
 body {
     font-family: 'League Spartan', sans-serif;
     overflow-x: hidden;
