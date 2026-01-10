@@ -176,7 +176,7 @@ class Hero
                     end: "bottom top",
                     scrub: 1.4
                 },
-                y: -20,
+                x: -20,
                 ease: "none"
             });
         }
