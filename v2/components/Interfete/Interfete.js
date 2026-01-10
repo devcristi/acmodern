@@ -140,6 +140,7 @@ class Interfete
                                     <!-- Adrese arrow -->
                                     <path d="M135,50 L190,50 L190,42 L205,55 L190,68 L190,60 L135,60 Z" class="arrow-block"/>
                                     <text x="170" y="42" class="arch-label">adrese</text>
+                                    <text x="170" y="42" class="arch-label">sdfsdf</text>
                                     
                                     <!-- Date arrow (bidirectional) -->
                                     <path d="M135,95 L147,87 L147,91 L193,91 L193,87 L205,95 L193,103 L193,99 L147,99 L147,103 Z" class="arrow-block"/>
@@ -161,7 +162,7 @@ class Interfete
                                     <!-- (b) Label -->
                                     <text x="480" y="158" class="label-title">(b) Arhitectură</text>
                                     <text x="500" y="178" class="label-sub">Harvard</text>
-                                    <text x="500" y="196" class="label-detail">(memorii separate)</text>
+                                    <text x="480" y="196" class="label-detail">(memorii separate)</text>
                                     
                                     <!-- MP box -->
                                     <rect x="20" y="175" width="115" height="125" class="arch-box"/>
@@ -255,16 +256,18 @@ class Interfete
                                     <!-- Tampon unidirecțional inside UCP (right) -->
                                     <rect x="125" y="230" width="65" height="55" class="buffer-box"/>
                                     <text x="157" y="252" class="buffer-text-sm">Tampon</text>
-                                    <text x="157" y="268" class="buffer-text-sm">unidirecț.</text>
+                                    <text x="157" y="268" class="buffer-text-sm">unidirecional</text>
                                     
                                     <!-- Memoria Principală Box -->
                                     <rect x="320" y="90" width="140" height="180" class="main-box mem-box"/>
-                                    <text x="390" y="145" class="box-title-italic">Memoria</text>
-                                    <text x="390" y="168" class="box-title-italic">Principală</text>
                                     
                                     <!-- Date section in memory -->
                                     <rect x="340" y="100" width="100" height="35" class="mem-section"/>
                                     <text x="390" y="123" class="mem-text">Date</text>
+                                    
+                                    <!-- Memoria Principală title (after Date section so it appears on top) -->
+                                    <text x="390" y="165" class="box-title-italic">Memoria</text>
+                                    <text x="390" y="188" class="box-title-italic">Principală</text>
                                     
                                     <!-- Control & Stări label -->
                                     <text x="355" y="238" class="mem-text-sm">Control</text>
@@ -289,7 +292,8 @@ class Interfete
                                     <!-- Magistrală bidirecțională label -->
                                     <text x="560" y="40" class="bus-label">Magistrală</text>
                                     <text x="560" y="55" class="bus-label">bidirecțională de</text>
-                                    <text x="560" y="70" class="bus-label">date și instrucțiuni</text>
+                                    <text x="560" y="40" class="bus-label">date și</text>
+                                    <text x="560" y="50" class="bus-label">instrucțiuni</text>
                                     
                                     <!-- === PARALLEL LINES from Tampon boxes === -->
                                     <!-- Line from Tampon (left) going down -->
@@ -315,7 +319,7 @@ class Interfete
                                     <polygon points="157,295 152,305 162,305" class="bus-arrow"/>
                                     
                                     <!-- Magistrală de adrese label -->
-                                    <text x="560" y="315" class="bus-label">Magistrală de</text>
+                                    <text x="545" y="315" class="bus-label">Magistrală de</text>
                                     <text x="560" y="330" class="bus-label">adrese</text>
                                     
                                     <!-- Control bus (bottom) - connects Tampon to Control&Stări -->
@@ -327,7 +331,7 @@ class Interfete
                                     <polygon points="82,295 77,305 87,305" class="bus-arrow"/>
                                     
                                     <!-- Magistrală de control label -->
-                                    <text x="560" y="345" class="bus-label">Magistrală de</text>
+                                    <text x="545" y="345" class="bus-label">Magistrală de</text>
                                     <text x="560" y="360" class="bus-label">control</text>
                                 </svg>
                             </div>
@@ -425,7 +429,7 @@ class Interfete
 
         // 1. Show main boxes (UCP and Memory)
         tl.to(mainBoxes, { opacity: 1, duration: 0.5, stagger: 0.2 });
-        tl.to([texts[0], texts[8], texts[9]], { opacity: 1, duration: 0.3 }, "-=0.2"); // UCP and Memoria Principală titles
+        tl.to([texts[0], texts[7], texts[8]], { opacity: 1, duration: 0.3 }, "-=0.2"); // UCP and Memoria Principală titles
 
         // 2. Show buffer boxes inside UCP
         tl.to(bufferBoxes, { opacity: 1, scale: 1, duration: 0.4, stagger: 0.15 });
@@ -433,7 +437,7 @@ class Interfete
 
         // 3. Show memory sections
         tl.to(memSection, { opacity: 1, duration: 0.3 });
-        tl.to([texts[10], texts[11], texts[12], texts[13]], { opacity: 1, duration: 0.3 }, "-=0.1"); // Memory section texts
+        tl.to([texts[6], texts[9], texts[10], texts[11]], { opacity: 1, duration: 0.3 }, "-=0.1"); // Memory section texts
 
         // 4. Draw data bus (top)
         tl.to([lines[0], lines[1]], { strokeDashoffset: 0, duration: 0.4, stagger: 0.1 });

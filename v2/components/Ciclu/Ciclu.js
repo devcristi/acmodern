@@ -202,11 +202,16 @@ class Ciclu
                                     
                                     <!-- Diagram b) Bidirectional bus -->
                                     <div class="proc-diagram">
-                                        <svg class="proc-svg" viewBox="0 0 200 310">
+                                        <svg class="proc-svg" viewBox="0 0 200 320">
                                             <!-- Labels top -->
+                                            <text x="55" y="15" class="proc-label">C</text>
                                             <text x="145" y="15" class="proc-label">S</text>
+                                            <text x="55" y="15" class="proc-label">C</text>
                                             
-                                            <!-- Arrow from top (S in only) -->
+                                            <!-- Arrows from top (C out, S in) -->
+                                            <line x1="55" y1="20" x2="55" y2="50" class="proc-line"/>
+                                            <polygon points="55,20 50,30 60,30" class="proc-arrow-up"/>
+                                            
                                             <line x1="145" y1="20" x2="145" y2="50" class="proc-line"/>
                                             <polygon points="145,50 140,40 150,40" class="proc-arrow-down"/>
                                             
@@ -214,37 +219,60 @@ class Ciclu
                                             <rect x="30" y="50" width="140" height="100" class="proc-box"/>
                                             <text x="100" y="95" class="proc-ucp-text">UCP</text>
                                             
-                                            <!-- Internal labels -->
+                                            <!-- Internal labels I, Din, Dout -->
                                             <text x="55" y="135" class="proc-label-small">I</text>
                                             <text x="100" y="135" class="proc-label-small-sub">D<tspan baseline-shift="sub" font-size="8">in</tspan></text>
                                             <text x="145" y="135" class="proc-label-small-sub">D<tspan baseline-shift="sub" font-size="8">out</tspan></text>
                                             
-                                            <!-- Lines down from UCP -->
-                                            <line x1="55" y1="150" x2="55" y2="175" class="proc-line"/>
+                                            <!-- Line I down from UCP (with arrow up into UCP) -->
+                                            <line x1="55" y1="150" x2="55" y2="165" class="proc-line"/>
                                             <polygon points="55,150 50,160 60,160" class="proc-arrow-up"/>
+
+                                            <!-- Line from I to Din -->
+                                            <line x1="55" y1="165" x2="100" y2="165" class="proc-line"/>
+                                            <polygon points="100,150 95,160 105,160" class="proc-arrow-up"/>
                                             
-                                            <line x1="100" y1="150" x2="100" y2="175" class="proc-line"/>
-                                            <line x1="145" y1="150" x2="145" y2="175" class="proc-line"/>
+                                            <!-- Line Din down to buffer -->
+                                            <line x1="100" y1="150" x2="100" y2="170" class="proc-line"/>
                                             
-                                            <!-- Buffer triangles -->
-                                            <polygon points="100,175 90,195 110,195" class="proc-buffer"/>
-                                            <polygon points="145,195 135,175 155,175" class="proc-buffer"/>
+                                            <!-- Line Dout down to buffer -->
+                                            <line x1="145" y1="150" x2="145" y2="170" class="proc-line"/>
                                             
-                                            <!-- Lines from buffers to bus -->
-                                            <line x1="100" y1="195" x2="100" y2="215" class="proc-line"/>
-                                            <line x1="145" y1="195" x2="145" y2="215" class="proc-line"/>
+                                            <!-- Buffer triangle Din (pointing down - input) -->
+                                            <polygon points="100,170 90,190 110,190" class="proc-buffer"/>
                                             
-                                            <!-- Merge point -->
-                                            <line x1="100" y1="215" x2="145" y2="215" class="proc-line"/>
-                                            <line x1="122" y1="215" x2="122" y2="235" class="proc-line"/>
-                                            <polygon points="122,245 117,235 127,235" class="proc-arrow-down"/>
+                                            <!-- Stroked line connectting Din to UCP -->
+                                            
+                                            <!-- Buffer triangle Dout (pointing up - output) -->
+                                            <polygon points="145,190 135,170 155,170" class="proc-buffer"/>
+                                            
+                                            <!-- Dotted line from Dout buffer to UCP -->
+                                            <line x1="100" y1="170" x2="110" y2="170" class="proc-line-dotted"/>
+                                            <line x1="110" y1="150" x2="110" y2="170" class="proc-line-dotted"/>
+
+                                            <!-- Dotted line from Din buffer to UCP -->
+                                            <line x1="130" y1="170" x2="140" y2="170" class="proc-line-dotted"/>
+                                            <line x1="130" y1="150" x2="130" y2="170" class="proc-line-dotted"/>
+
+
+                                            <polygon points="170,105 165,115 175,115" class="proc-arrow-up"/>
+                                            <text x="180" y="145" class="proc-label-small">UCP</text>
+                                            
+                                            <!-- Lines from buffers down -->
+                                            <line x1="100" y1="190" x2="100" y2="210" class="proc-line"/>
+                                            <line x1="145" y1="190" x2="145" y2="210" class="proc-line"/>
+                                            
+                                            <!-- Horizontal merge line (bus) -->
+                                            <line x1="100" y1="210" x2="145" y2="210" class="proc-line"/>
+                                            <line x1="50" y1="200" x2="50" y2="210" class="proc-line"/>
+                                        
                                             
                                             <!-- Bus label -->
-                                            <text x="122" y="262" class="proc-label-bus">Magistrală bidirecțională de</text>
-                                            <text x="122" y="276" class="proc-label-bus">date și instrucțiuni</text>
+                                            <text x="100" y="260" class="proc-label-bus">Magistrală bidirecțională de</text>
+                                            <text x="100" y="275" class="proc-label-bus">date și instrucțiuni</text>
                                             
                                             <!-- Label b) -->
-                                            <text x="100" y="300" class="proc-diagram-label">b)</text>
+                                            <text x="100" y="305" class="proc-diagram-label">b)</text>
                                         </svg>
                                     </div>
                                 </div>

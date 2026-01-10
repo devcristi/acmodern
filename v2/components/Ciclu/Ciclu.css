@@ -307,6 +307,12 @@
     stroke-width: 1.5;
 }
 
+.proc-line-dotted {
+    stroke: #9B40EA;
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+}
+
 .proc-label-bus {
     font-family: 'League Spartan', sans-serif;
     font-size: 12px;
